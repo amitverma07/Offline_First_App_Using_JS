@@ -1,42 +1,37 @@
-const cacheName = 'v1'; //version name
-
-const cacheAssests = [   //variable of assests contains array of all pages
+const cacheVersion = "v1";
+const cacheAssets = [
   'index.html',
-  'about.html',
-  'contact.html',
-  'staff.html',
-  'main.js',
-  '/css/index.css',
-  '/css/about.css',
-  '/css/contact.css',
-  '/css/staff.css',
-  '/normalize/normalize.css'
+    'about.html',
+    'contact.html',
+    'staff.html',
+    'main.js',
+    'sw.js',
+    'css/index.css',
+    'css/about.css',
+    'css/contact.css',
+    'css/staff.css'
 ];
 
-//Call install event
-self.addEventListener('install', e => {
-  console.log("hi john");
-  e.waitUntil( //telling the browser to wait until promise is finised 
-    caches //caches storage api
-      .open(cacheName) //it uses variable cacheName defined above
+//Install Event
+self.addEventListener("install", e => {
+  e.waitUntil(
+    caches
+      .open(cacheVersion)
       .then(cache => {
-        cache.addAll(cacheAssests);
+        cache.addAll(cacheAssets);
       })
       .then(() => self.skipWaiting())
   );
 });
 
-//Call activate event
-self.addEventListener('activate', e => {
-  console.log("activated");
-  //remove unwanted caches
+//Activate Event
+self.addEventListener("activate", e => {
   e.waitUntil(
-    caches.keys().then(cacheName => {
+    caches.keys().then(cacheVersions => {
       return Promise.all(
-        cacheName.map(cache => {
-          if (cache !== cacheName) {
-            console.log("delete old cache");
-            return caches.delete(cache);
+        cacheVersions.map(cacheName => {
+          if (cacheName !== cacheVersion) {
+            return caches.delete(cacheName);
           }
         })
       );
@@ -44,8 +39,7 @@ self.addEventListener('activate', e => {
   );
 });
 
-//call fetch event
-self.addEventListener('fetch', e => {
-  console.log("fetching");
+//Fetch Event
+self.addEventListener("fetch", e => {
   e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
 });
