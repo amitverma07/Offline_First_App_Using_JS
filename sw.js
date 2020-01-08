@@ -1,4 +1,5 @@
 const cacheVersion = "v1";
+
 const cacheAssets = [
   './index.html',
     './about.html',
@@ -10,6 +11,7 @@ const cacheAssets = [
     './css/about.css',
     './css/contact.css',
     './css/staff.css',
+    './normalize/normalize.css',
     '/HTTPS://placekitten.com/120/120',
     '/HTTPS://placekitten.com/225/175'
 ];
