@@ -9,7 +9,9 @@ const cacheAssets = [
     'css/index.css',
     'css/about.css',
     'css/contact.css',
-    'css/staff.css'
+    'css/staff.css',
+    'HTTPS://placekitten.com/120/120',
+    'HTTPS://placekitten.com/225/175'
 ];
 
 //Install Event
